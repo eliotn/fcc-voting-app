@@ -5,7 +5,22 @@ var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
-
+var winston = require('winston');
+ 
+winston.add(
+  winston.transports.File, {
+    filename: 'myLogFile.log',
+    level: 'info',
+    json: true,
+    eol: '\n', // for Windows, or `eol: ‘n’,` for *NIX OSs
+    timestamp: true,
+    handleExceptions: true,
+    exitOnError: true
+  }
+)
+ 
+winston.log('info', 'Hello log files!');
+winston.info('Hello again log files!');
 var app = express();
 require('dotenv').load();
 require('./app/config/passport')(passport);
