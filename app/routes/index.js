@@ -56,10 +56,28 @@ module.exports = function (app, passport) {
 		.put(isLoggedIn, clickHandler.addClick)
 		.post(isLoggedIn, clickHandler.removeClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
-		
-	//poll routes
-	app.route('/api/:poll')
-		.get(isLoggedIn, pollHandler.getPolls)
+	
+	app.route('/api/allPolls').get(pollHandler.getPolls);
+	
+	//see all polls
+	//app.route('/api/polls/')
+	//	.get(pollHandler.getPolls);
+	
+	//see specific poll
+	//app.route('/api/polls/view/:pollid')
+	//	.get(pollHandler.getPoll)
+	
+	//vote on a poll
+	//app.route('/api/polls/view/:pollid/vote/:votenum')
+	// .post(*)
+	
+	//polls by user
+	//post a poll, delete a poll, view a poll
+	//if not logged in displays different page
+	app.route('/api/pollsBy/:id')
 		.post(isLoggedIn, pollHandler.addPoll)
 		.delete(isLoggedIn, pollHandler.removePoll);
+		
+	//modify a poll
+	//app.route('/api/modifyPollBy/:id/poll/:poll')
 };
