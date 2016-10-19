@@ -12,6 +12,7 @@ module.exports = function (app, passport) {
 			res.redirect('/login');
 		}
 	}
+	
 
 	var clickHandler = new ClickHandler();
 	var pollHandler = new PollHandler();
@@ -37,7 +38,7 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/profile.html');
 		});
 
-	app.route('/api/:id')
+	app.route('/api/user/:id')
 		.get(isLoggedIn, function (req, res) {
 			res.json(req.user.github);
 		});
@@ -51,13 +52,15 @@ module.exports = function (app, passport) {
 			failureRedirect: '/login'
 		}));
 
-	app.route('/api/:id/clicks')
+	app.route('/api/user/:id/clicks')
 		.get(isLoggedIn, clickHandler.getClicks)
 		.put(isLoggedIn, clickHandler.addClick)
 		.post(isLoggedIn, clickHandler.removeClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
 	
-	app.route('/api/allPolls').get(pollHandler.getPolls);
+	app.route('/api/allPolls/').get(function (req, res) {
+		pollHandler.getPolls(req, res);
+	});
 	
 	//see all polls
 	//app.route('/api/polls/')

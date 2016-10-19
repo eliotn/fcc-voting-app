@@ -4,9 +4,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Poll = new Schema({
-    owner: mongoose.Schema.Types.ObjectId,
-    question: String,
-    choices: [{name:String, votes:Number}]
+    owner: String,
+    question: {type: String, default: "What should my question be?"},
+    choices: [{name:String, votes:Number}],
+    creationtime: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Poll', Poll);

@@ -15,7 +15,7 @@ winston.add(
     eol: '\n', // for Windows, or `eol: ‘n’,` for *NIX OSs
     timestamp: true,
     handleExceptions: true,
-    exitOnError: true
+    exitOnError: false
   }
 )
  
