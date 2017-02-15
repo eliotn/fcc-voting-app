@@ -58,9 +58,7 @@ module.exports = function (app, passport) {
 		.post(isLoggedIn, clickHandler.removeClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
 	
-	app.route('/api/allPolls/').get(function (req, res) {
-		pollHandler.getPolls(req, res);
-	});
+	app.route('/api/allPolls/').get(pollHandler.getPolls);
 	
 	//see all polls
 	//app.route('/api/polls/')
@@ -77,8 +75,9 @@ module.exports = function (app, passport) {
 	//polls by user
 	//post a poll, delete a poll, view a poll
 	//if not logged in displays different page
-	app.route('/api/pollsBy/:id')
-		.post(isLoggedIn, pollHandler.addPoll)
+	app.route('/api/addPoll')
+		.post(isLoggedIn, pollHandler.addPoll);
+	app.route('/api/removePoll')
 		.delete(isLoggedIn, pollHandler.removePoll);
 		
 	//modify a poll

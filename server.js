@@ -5,8 +5,13 @@ var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
+//added
 var winston = require('winston');
- 
+//support body parsing for posts --
+//thanks http://stackoverflow.com/questions/5710358/how-to-retrieve-post-query-parameters-in-express
+var bodyParser = require('body-parser');
+
+
 winston.add(
   winston.transports.File, {
     filename: 'myLogFile.log',
@@ -26,6 +31,10 @@ require('dotenv').load();
 require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI);
+
+app.use(bodyParser.urlencoded({     
+  extended: true
+}));
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));

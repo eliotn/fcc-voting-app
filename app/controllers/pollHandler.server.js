@@ -6,13 +6,6 @@ function PollHandler () {
     var pollsclicked = 0;
     //Polls.find(owner.github.id, );
     this.getPolls = function(req, res) {
-        /*Polls.find().exec(function(err, result) {
-            if (err) { throw err; }
-            res.json({"test": result});
-            return;
-        });*/
-        
-        //jsons["HI"] = "Hello" + pollsclicked;
         Poll.find({}, function (err, polls) {
             var jsons = {};
             if (err) {
@@ -31,11 +24,12 @@ function PollHandler () {
                 i += 1;
             });
             res.json(jsons);
-        })
+        });
+        //res.json({"Hello":{"question": "Is this a test?"}});
         
     };
     this.addPoll = function(req, res) {
-        var poll = new Poll({"owner":req.user.github.id, "question":"Are you ready 2?", "choices":[]});
+        var poll = new Poll({"owner":req.user.github.id, "question":req.body.question, "choices":[]});
         poll.save(function(err) {
             if (err) {console.error(err); }
             
