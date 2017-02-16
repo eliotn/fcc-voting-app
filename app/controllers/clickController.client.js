@@ -13,7 +13,7 @@
       var clicksObject = JSON.parse(data);
       clickNbr.innerHTML = clicksObject.clicks;
    }
-   ////require('winston').info("UPDATING POLLS");
+   
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
 
    addButton.addEventListener('click', function () {

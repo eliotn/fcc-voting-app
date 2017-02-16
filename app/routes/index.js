@@ -58,7 +58,7 @@ module.exports = function (app, passport) {
 		.post(isLoggedIn, clickHandler.removeClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
 	
-	app.route('/api/allPolls/').get(pollHandler.getPolls);
+	app.route('/api/polls/').get(pollHandler.getPolls);
 	
 	//see all polls
 	//app.route('/api/polls/')
